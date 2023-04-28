@@ -35,7 +35,7 @@ fetch("https://fakestoreapi.com/products")
         // console.log(item); // The entire item object can be accessed here
         cartItems.push(item); // The entire item object can be accessed here
         console.log(item);
-        shareViaEmail();
+        // shareViaEmail();
         checkCart();
       };
       card.appendChild(button);
@@ -43,11 +43,6 @@ fetch("https://fakestoreapi.com/products")
     });
   });
 
-function shareViaEmail() {
-  const subject = "";
-  const body = encodeURIComponent("https://www.facebook.com/");
-  window.open(`mailto:?laurencecadag1@gmail.com?subject=Hello&body=${body}`);
-}
 
 // console.log(cartItems.length)
 
