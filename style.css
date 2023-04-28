@@ -1,0 +1,33 @@
+.hero-img {
+  width: 100%;
+  min-height: calc(100vh - 50px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.16),
+      rgba(25, 24, 24, 0.92)),
+    url("./assets/background.jpg");
+  height: calc(100vh - 60px);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.products {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+
+.grid .box {
+  height: 100%;
+}
+
+.grid .box img {
+  width: 100%;
+  aspect-ratio: 1/1;
+}
+@media only screen and (max-width: 600px) {
+  .products {
+    display: flex;
+    flex-direction: column;
+  }
+}

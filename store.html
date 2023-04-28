@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="">
+    <nav class="text-red-700 py-3 border-b-2 border-red-400">
+      <div class="container px-4 mx-auto flex justify-between items-center">
+        <a href="index.html" class="font-black text-xl">Fake Store API</a>
+        <div class="flex gap-x-3 items-center">
+          <a
+            href=""
+            class="p-2 hover:border-red-700 border-transparent border-2"
+            >Products</a
+          >
+          <a
+            href=""
+            class="p-2 hover:border-red-700 border-transparent border-2"
+            >About</a
+          >
+          <a
+            href=""
+            class="p-2 hover:border-red-700 border-transparent border-2"
+            >Store</a
+          >
+        </div>
+      </div>
+    </nav>
+    <main class="products m-8">
+      <div class="items">
+        <h1 class="text-4xl font-medium uppercase mb-6 sm:text-center md:text-left">Available Products</h1>
+        <div
+          class="grid grid-cols-4 gap-x-2 gap-y-4 items auto-rows-max md:grid-cols-4 sm:grid-cols-2 xs:grid-cols-1"
+          id="productList"
+        ></div>
+      </div>
+      <div class="filters md:px-4" id="test">
+        <h1 class="text-right text-3xl font-medium uppercase mb-2">
+          Cart <span class="material-icons"> shopping_basket </span>
+        </h1>
+        <div class=" border-b-2 border-red-700 mb-3"></div>
+        <div id="cart" class="flex flex-col mx-auto mb-2">
+          <!-- <div
+            class="cartItem p-1 grid grid-cols-3 justify-items-stretch border-2 "
+            id="cartItem"
+          >
+            <div>Item</div>
+            <div>Item Here</div>
+            <div class="justify-self-end">Price</div>
+          </div> -->
+        </div>
+      </div>
+    </main>
+    <footer class="py-3 bg-red-700 text-white mt-auto">
+      <div class="px-4 mx-auto flex justify-between">
+        <h1>Powered by FakeStoreApi</h1>
+        <ul class="flex gap-x-2 gap-y-4">
+          <li>
+            <a href="" class="hover:border-white border-transparent border-b-2"
+              >@Cadsu3</a
+            >
+          </li>
+          <li>
+            <a href="" class="hover:border-white border-transparent border-b-2"
+              >@LaurenceDev</a
+            >
+          </li>
+        </ul>
+      </div>
+    </footer>
+    <script src="index.js" defer></script>
+  </body>
+</html>
