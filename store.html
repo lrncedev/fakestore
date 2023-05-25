@@ -4,16 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body id="store">
+  <body id="store" class="bg-gray-50">
+    
+    <!-- Navigation -->
     <nav class="text-red-700 py-3 border-b-2 border-red-400">
       <div class="container px-4 mx-auto flex justify-between items-center">
-        <a href="index.html" class="font-black text-xl">Fake Store API</a>
+        <a href="index.html" class="font-black text-xl">Commercial</a>
         <div class="flex gap-x-3 items-center">
           <a
             href=""
@@ -36,42 +35,36 @@
         </div>
       </div>
     </nav>
-    <main class="products m-8">
-      <div class="items">
-        <h1 class="text-4xl font-medium uppercase mb-6 sm:text-center md:text-left">Available Products</h1>
-        <div id="categoryTabs" class="grid-by-5 mb-4 "></div>
-        <div
-          class=""
-          id="productList"
-        ></div>
+
+    <main class="products m-4">
+      <div class="side-by-2 ">
+        <!-- Filtering -->
+        <div class="filters shadow-lg">
+          <div class="m-6 filterDiv">
+            <div class="price-filter">
+              <h2 class="font-bold">Price</h2>
+            </div>
+            <div>
+              <h2 class="font-bold">Categories</h2>
+              <div id="category-filter" class="ml-4"></div>
+            </div>
+          </div>
+        </div>
+        <div class="items  shadow-lg">
+          <div class="m-4">
+            <h1 class="text-xl font-bold uppercase mb-6 sm:text-center md:text-left text-gray-500">Available Products</h1>
+            <!-- Product List-->
+            <div id="productList"></div>
+          </div>
+        </div>
       </div>
-      <!-- <div class="filters md:px-4" id="test">
-        <h1 class="text-right text-3xl font-medium uppercase mb-2">
-          Cart <span class="material-icons"> shopping_basket </span>
-        </h1>
-        <div class=" border-b-2 border-red-700 mb-3"></div>
-      </div> -->
-    </main>
-    <footer class="py-3 bg-red-700 text-white mt-auto">
-      <div class="px-4 mx-auto flex justify-between">
-        <h1>Powered by FakeStoreApi</h1>
-        <ul class="flex gap-x-2 gap-y-4">
-          <li>
-            <a href="" class="hover:border-white border-transparent border-b-2"
-              >@Cadsu3</a
-            >
-          </li>
-          <li>
-            <a href="" class="hover:border-white border-transparent border-b-2"
-              >@LaurenceDev</a
-            >
-          </li>
-        </ul>
-      </div>
-    </footer>
+    </main>    
+
+    <!-- Loading state -->
     <div class="loader-bg active">
       <div class="lds-dual-ring"></div>
     </div>
+
     <script src="index.js" defer></script>
   </body>
 </html>
