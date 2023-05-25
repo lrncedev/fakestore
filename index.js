@@ -8,7 +8,6 @@ const maxPrice = document.getElementById("price-max");
 const minPrice = document.getElementById("price-min");
 const priceSetter = document.getElementById("price-setter");
 const sortBySelect = document.getElementById("sort-by");
-const selectedValue = sortBySelect.value;
 const closeModalBtn = document.getElementById("closeModal");
 const modalContainer = document.getElementById("modalContainer");
 const cartContent = document.getElementById("modalContent");
@@ -57,8 +56,9 @@ async function getCategories () {
 }
 
 
-sortBySelect.addEventListener("change", () => {
 
+sortBySelect.addEventListener("change", () => {
+const selectedValue = sortBySelect.value;
   sortProduct(productItems, selectedValue)
 });
 
@@ -135,7 +135,7 @@ const showProducts = (products) => {
 }
 
 const sortProduct = (products, sortBy) => {
-  console
+  console.log(sortBy)
   let items;
   switch(sortBy){
     case 'desc':
