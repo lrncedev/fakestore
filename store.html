@@ -10,26 +10,21 @@
   <body id="store" class="bg-gray-50">
     
     <!-- Navigation -->
-    <nav class="text-red-700 py-3 border-b-2 border-red-400">
+    <nav class="bg-red-700 text-white py-2">
       <div class="container px-4 mx-auto flex justify-between items-center">
         <a href="index.html" class="font-black text-xl">Commercial</a>
         <div class="flex gap-x-3 items-center">
           <a
-            href=""
-            class="p-2 hover:border-red-700 border-transparent border-2"
-            >Products</a
+            href="index.html"
+            class="p-2 hover:border-white ease-in border-transparent border-2"
+            >Home</a
           >
           <a
             href=""
-            class="p-2 hover:border-red-700 border-transparent border-2"
+            class="p-2 hover:border-white ease-in border-transparent border-2"
             >About</a
           >
-          <a
-            href=""
-            class="p-2 hover:border-red-700 border-transparent border-2"
-            >Store</a
-          >
-          <button>
+          <button id="cart" class="p-2 hover:border-white ease-in border-transparent border-2">
             <span class="material-icons"> shopping_basket </span>
           </button>
         </div>
@@ -42,17 +37,33 @@
         <div class="filters shadow-lg">
           <div class="m-6 filterDiv">
             <div class="price-filter">
-              <h2 class="font-bold">Price</h2>
+              <h2 class="font-bold mb-2">Price</h2>
+              <div>
+                <div class="flex justify-between">
+                  <div class="bg-gray-200  rounded-md px-2 py-2">From: <span id="price-min"></span></div>
+                  <div class="bg-gray-200  rounded-md px-2 py-2">Up to: <span id="price-max"></span></div>
+                </div>
+                <div id="price-setter"></div>
+              </div>
             </div>
-            <div>
+            <div class="mt-2">
               <h2 class="font-bold">Categories</h2>
-              <div id="category-filter" class="ml-4"></div>
+              <div id="category-filter"></div>
             </div>
           </div>
         </div>
         <div class="items  shadow-lg">
           <div class="m-4">
-            <h1 class="text-xl font-bold uppercase mb-6 sm:text-center md:text-left text-gray-500">Available Products</h1>
+            <div class="flex items-center justify-between mb-4">
+              <h1 class="text-xl font-bold uppercase sm:text-center md:text-left text-gray-500">Available Products</h1>
+              <div>
+                <label for="sort-by">Sort by: </label>
+                <select name="sort-by" id="sort-by">
+                  <option value="asc">Price: Low - High</option>
+                  <option value="desc">Price: High - Low</option>
+                </select>
+              </div>
+            </div>
             <!-- Product List-->
             <div id="productList"></div>
           </div>
@@ -60,6 +71,20 @@
       </div>
     </main>    
 
+    <div id="modalContainer">
+      <div class="modalContent">
+        <div class="px-4 py-2 flex justify-between items-center">
+          <h2 class="font-bold text-xl text-gray-700">My Cart</h2>
+          <div class="text-sm text-gray-600">Cart Value: <span id="cartTotal">$100</span></div>
+        </div>
+        <hr>
+        <div id="modalContent"  class="px-4 pt-2 bg-gray-100"></div>
+      </div>
+    </div>
+
+    <div id="addedToCart" class="toast">
+      <div class="text-sm">Item added to cart</div>
+    </div>
     <!-- Loading state -->
     <div class="loader-bg active">
       <div class="lds-dual-ring"></div>
