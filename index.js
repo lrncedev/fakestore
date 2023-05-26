@@ -12,10 +12,17 @@ const closeModalBtn = document.getElementById("closeModal");
 const modalContainer = document.getElementById("modalContainer");
 const cartContent = document.getElementById("modalContent");
 const addedToCart = document.getElementById("addedToCart");
+const cartTotal = document.getElementById("cartTotal");
+const cartCount = document.getElementById("cartCount");
+const deleteBtn = document.getElementById("deleteBtn");
+
 
 let productItems = [];
 let cartItems = [];
 let categories = [];
+let featuredItems = [];
+
+
 
 cart.addEventListener("click", () => {
   modalContainer.classList.add("open");
@@ -57,10 +64,12 @@ async function getCategories () {
 
 
 
-sortBySelect.addEventListener("change", () => {
-const selectedValue = sortBySelect.value;
-  sortProduct(productItems, selectedValue)
-});
+if(sortBySelect) {
+  sortBySelect.addEventListener("change", () => {
+    const selectedValue = sortBySelect.value;
+      sortProduct(productItems, selectedValue)
+    });
+}
 
 
 const filterByCategory = (category) => {
@@ -120,7 +129,18 @@ const showProducts = (products) => {
     actionManager.appendChild(viewBtn)
     actionManager.appendChild(button)
     button.onclick = () => {
-      cartItems.push(item);
+      let itemExist;
+
+      cartItems.forEach((cartItem) => {
+        if(cartItem.id == item.id) {
+          itemExist = true;
+          cartItem.quantity += 1;
+        }
+      })
+      // const index = 
+      if(!itemExist) {
+        cartItems.push({...item, quantity: 1});
+      }
 
       addedToCart.classList.add("show");
       setTimeout(() => {
@@ -135,7 +155,6 @@ const showProducts = (products) => {
 }
 
 const sortProduct = (products, sortBy) => {
-  console.log(sortBy)
   let items;
   switch(sortBy){
     case 'desc':
@@ -149,14 +168,24 @@ const sortProduct = (products, sortBy) => {
 }
 
 
+
+
 async function fetchProducts() {
+  if(loader) {
   try {
     fetch("https://fakestoreapi.com/products")
       .then((res) => res.json())
       .then((data) => {
         getCategories();
         loader.classList.add("active");
+
         productItems = data;
+
+        let featured = productItems.filter((item) => item.rating.rate > 4.5);
+        featuredItems = featured;
+
+        console.log(featuredItems);
+
         showProducts(productItems)
         const highestPrice = productItems.reduce((maxPrice, product) => {
           return (product.price > maxPrice) ? product.price : maxPrice;
@@ -190,27 +219,86 @@ async function fetchProducts() {
   }
   loader.classList.remove('active')
 }
+}
+
+
+const hasItem = () => {
+  let count = cartItems.length > 0 ? cartItems.length: '';
+  cartCount.textContent = count;
+}
+
+
+if (cartItems.length == 0) {
+  const placeHoldText = document.createElement("div");
+  placeHoldText.classList.add("text-center", "text-xl", "uppercase");
+  placeHoldText.innerHTML = "No items in cart";
+  cartContent.appendChild(placeHoldText);
+}
 
 function checkCart() {
-  if (cartItems.length == 0) {
-    const placeHoldText = document.createElement("div");
-    placeHoldText.classList.add("text-center", "text-xl", "uppercase");
-    placeHoldText.innerHTML = "No items in cart";
-    cartContent.appendChild(placeHoldText);
-  } else {
+  // if (cartItems.length == 0) {
+  //   const placeHoldText = document.createElement("div");
+  //   placeHoldText.classList.add("text-center", "text-xl", "uppercase");
+  //   placeHoldText.innerHTML = "No items in cart";
+  //   cartContent.appendChild(placeHoldText);
+  // } else {
+    hasItem();
     let text = "";
+    let total = 0;
     cartItems.forEach((item) => {
       text += `
       <div class="cart-items mb-2 ">
         <div class="mr-2"> <img src="${item.image}" class="small-img"> </div>
         <div class="text-xs" >${item.title.substring(0, 25) + "..."}</div>
-        <div class="justify-self-end">$${item.price}</div>
+        <div class="">$${item.price}</div>
+        <div class="ml-auto quantity-control grid-by-3">
+          <button class="quantity-btn px-2 bg-gray-100" onclick="decrementQuantity(${item.id})">-</button>
+          <span class="quantity" id="actual-quantity">${item.quantity}</span>
+          <button class="quantity-btn px-2 bg-gray-100" onclick="incrementQuantity(${item.id})">+</button>
+        </div>
+        <div class="delete-item ml-sm" id="deleteBtn" onclick="deleteItem(${item.id})">
+          <button class="delete-btn flex items-center">
+            <span class="material-icons" style="display: inline-block;">delete</span>
+          </button>
+        </div>
       </div>`;
+      total += (item.price) * item.quantity; 
     });
     cartContent.classList.add('overflow-scroll')
     cartContent.innerHTML = text;
-  }
+    cartTotal.textContent = total.toFixed(2);
+  // }
 }
+
+const decrementQuantity = (itemId) => {
+  cartItems.forEach((item) => {
+    if(item.id == itemId) {
+      if(item.quantity > 1 ) {
+        item.quantity--;
+        const itemQuantity = document.getElementById("actual-quantity");
+        itemQuantity.textContent = item.quantity;
+      }
+    }
+    checkCart();
+  })
+}
+
+const incrementQuantity = (itemId) => {
+  cartItems.forEach((item) => {
+    if(item.id == itemId) {
+        item.quantity++;
+        const itemQuantity = document.getElementById("actual-quantity");
+        itemQuantity.textContent = item.quantity;
+    }
+  })
+  checkCart();
+}
+
+const deleteItem = (itemId) => {
+  cartItems = cartItems.filter((item) => item.id !== itemId);
+  checkCart();
+}
+
 
 window.onload = function() {
   if (store) {
