@@ -3,36 +3,49 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <nav class="bg-red-700 text-white py-3">
-      <div class="container px-4 mx-auto flex justify-between">
-        <h1 class="font-black text-xl">Fake Store API</h1>
+    <nav class="text-red-700 py-2 ">
+      <div class="container px-4 mx-auto w-4/5 flex justify-between items-center">
+        <a href="" class="font-black text-xl">Commercial</a>
         <div class="flex gap-x-3">
-          <a href="" class="hover:border-white border-transparent border-2"
-            >Products</a
-          >
-          <a href="" class="hover:border-white border-transparent border-2"
-            >About</a
-          >
-          <a href="" class="hover:border-white border-transparent border-2"
+          <a href="/store.html"  class="font-medium p-2 hover:border-white ease-in border-transparent border-2"
             >Store</a
           >
+          <button id="cart" class="p-2 hover:border-white ease-in border-transparent border-2">
+            <span class="material-icons"> shopping_basket </span>
+            <span id="cartCount"></span>
+          </button> 
         </div>
       </div>
     </nav>
-    <div class="hero-img">
-      <div class="hero text-white text-center">
-        <h1 class="text-4xl font-black uppercase mb-6">
-          Fake Store API Project
-        </h1>
-        <a
-          href="store.html"
-          class="p-2 rounded font-black border-white border-4 mt-auto hover:bg-red-700"
-          >Shop now</a
-        >
+    
+    <main>
+      <!-- Hero -->
+      <div class="hero-img  w-4/5 mx-auto rounded-lg">
+        <div class="text-center">
+          <div class="text-5xl text-white font-bold drop-shadow-md">Fashion up your look.</div>
+          <br>
+          <a href="store.html" class="bg-gray-100 text-gray-600 rounded-sm text-center font-bold px-2 py-2">Shop Now</a>
+        </div>
+      </div>
+      <!-- Highest rated-->
+      <div class="w-4/5 mx-auto mt-2">
+        <div id="featured"></div>
+      </div>
+    </main>
+    
+    <div id="modalContainer">
+      <div class="modalContent">
+        <div class="px-4 py-2 flex justify-between items-center">
+          <h2 class="font-bold text-xl text-gray-700">My Cart</h2>
+          <div class="text-sm text-gray-600">Cart Value: <span id="cartTotal"></span></div>
+        </div>
+        <hr>
+        <div id="modalContent"  class="px-4 pt-2 bg-gray-100"></div>
       </div>
     </div>
     <script src="index.js"></script>
